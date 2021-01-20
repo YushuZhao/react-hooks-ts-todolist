@@ -1,12 +1,14 @@
 import React, { FC, ReactElement, useCallback, useEffect, useReducer } from 'react';
 import styled from 'styled-components';
 import AddToDo from './AddToDo';
+import TdList from './List';
 import { todoReducer } from './reducer';
 import { IToDoItem, IToDoList, ACTION_TYPE } from './typings';
 
 const Title = styled.div`
     color: #000;
-    font-size:18px;
+    font-size: 18px;
+    text-align: center;
 `;
 
 function init(initTodoList: IToDoItem[]): IToDoList {
@@ -38,12 +40,31 @@ const ToDoListComponent: FC = (): ReactElement => {
         })
     }, []);
 
+    const toggleTodo = useCallback((id: number): void => {
+        dispatch({
+            type: ACTION_TYPE.TOGGLE_TODO,
+            payload: id
+        })
+    }, []);
+
+    const removeTodo = useCallback((id: number): void => {
+        dispatch({
+            type: ACTION_TYPE.REMOVE_TODO,
+            payload: id
+        })
+    }, []);
+
     return (
         <div className='todolist'>
-            <Title>todolist</Title>
+            <Title>ToDoList</Title>
             <AddToDo
                 addToDo={addTodo}
                 todoList={state.todoList}
+            />
+            <TdList
+                todoList={state.todoList}
+                toggleTodo={toggleTodo}
+                removeTodo={removeTodo}
             />
         </div>
     );

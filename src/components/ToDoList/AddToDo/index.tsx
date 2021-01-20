@@ -1,13 +1,14 @@
 import React, { useRef, FC, ReactElement } from 'react';
 import styled from 'styled-components';
-
 import { IToDoItem } from '../typings'
+import { Button } from '../../../styles/common';
 
-interface InputStyleProps {
+interface IPropsInputStyle {
     inputColor?: string;
 }
 
-const Input = styled.input<InputStyleProps>`
+const Input = styled.input<IPropsInputStyle>`
+    width: 200px;
     padding: 5px;
     font-size: 16px;
     border-radius: 3px;
@@ -15,23 +16,12 @@ const Input = styled.input<InputStyleProps>`
     color: ${props => props.inputColor || "lightpink"};
 `;
 
-const Button = styled.button`
-    width: 80px;
-    padding: 5px;
-    margin: 5px;
-    font-size: 14px;
-    border-radius: 3px;
-    border: solid 1px #ccc;
-    color: #fe102b;
-    cursor: pointer;
-`;
-
-interface AddToDoProps {
+interface IPropsAddToDo {
     addToDo: (todo: IToDoItem) => void;
     todoList: IToDoItem[];
 }
 
-const AddToDo: FC<AddToDoProps> = ({ addToDo, todoList }): ReactElement => {
+const TdAdd: FC<IPropsAddToDo> = ({ addToDo, todoList }): ReactElement => {
     const inputRef = useRef<HTMLInputElement>(null);
 
     const addItem = (): void => {
@@ -62,4 +52,4 @@ const AddToDo: FC<AddToDoProps> = ({ addToDo, todoList }): ReactElement => {
     )
 }
 
-export default AddToDo;
+export default TdAdd;
