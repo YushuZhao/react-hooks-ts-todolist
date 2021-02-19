@@ -9,15 +9,19 @@ interface IProps {
     removeTodo: (id: number) => void;
 }
 
-const ViewBox = styled.div`
-    border: solid 1px #000;
+interface IPropsDivStyle {
+    borderColor?: string;
+}
+
+const ViewBox = styled.div<IPropsDivStyle>`
+    border:  solid 1px ${props => props.borderColor};
     border-radius: 5px;
     width: 320px;
 `
 
 const TdList: FC<IProps> = ({ todoList, toggleTodo, removeTodo }): ReactElement => {
     return (
-        <ViewBox className="todo-list">
+        <ViewBox className="todo-list" borderColor={todoList.length ? '#000' : '#fff'}>
             {
                 todoList && todoList.map((todo: IToDoItem) => {
                     return (
